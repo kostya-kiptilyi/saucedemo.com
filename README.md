@@ -1,2 +1,0 @@
-# saucedemo.com
-# saucedemo.com
