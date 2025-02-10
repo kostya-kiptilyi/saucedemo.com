@@ -1,5 +1,3 @@
-import { command } from "commander";
-
 describe('saucedemo.com', () => {
 
   before(() => {
@@ -68,6 +66,14 @@ describe('saucedemo.com', () => {
 
   it('Back to inventory list after ordering', () => {
     cy.backToInventoryListAfterOrdering()
+  });
+
+  it('Open the menu', () => {
+    cy.clickOnMenuBtn();
+  })
+
+  it('Log out', () =>{
+    cy.logOut();
   });
 
 });

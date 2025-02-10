@@ -4,11 +4,14 @@ const randomFirstName = faker.person.firstName();
 const randomLastName = faker.person.lastName();
 const randomZipCode = faker.address.zipCode();
 
+const userName = 'standard_user';
+const password = 'secret_sauce';
+
 Cypress.Commands.add('logIn', () => {
     cy.visit('https://www.saucedemo.com/');
     cy.checkURL('https://www.saucedemo.com/');
-    cy.get('[data-test="username"]').type('standard_user');
-    cy.get('[data-test="password"]').type('secret_sauce');
+    cy.get('[data-test="username"]').type(userName);
+    cy.get('[data-test="password"]').type(password);
     cy.get('[data-test="login-button"]').click();
 });
 
@@ -76,4 +79,13 @@ Cypress.Commands.add('verifyDisplayOfSuccessMessage', () => {
 Cypress.Commands.add('backToInventoryListAfterOrdering', () => {
     cy.get('[data-test="back-to-products"]').click();
     cy.checkURL('https://www.saucedemo.com/inventory.html');
+});
+
+Cypress.Commands.add('clickOnMenuBtn', ()=> {
+    cy.get('#react-burger-menu-btn').click({force: true});
+});
+
+Cypress.Commands.add('logOut', () =>{
+    cy.get('[data-test="logout-sidebar-link"]').click({force: true});
+    cy.checkURL('https://www.saucedemo.com/');
 });
