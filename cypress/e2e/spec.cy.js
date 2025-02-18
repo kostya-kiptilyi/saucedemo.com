@@ -1,3 +1,16 @@
+import { faker } from '@faker-js/faker';
+
+import { typePassword, typeUserName, clickOnLogInBtn } from "../PageObjects/logInPage";
+import {getInventoryContainer, getRemoveSauceLabsBackpackBtn} from "../PageObjects/inventoryPage";
+import {getReactBurgerMenuBtn, getShoppingCartBadge} from "../PageObjects/headerContainerPage";
+import {getCheckooutBtn, getContinueShoppingBtn} from "../PageObjects/cartPage";
+import{getBackToProductsBtn, getCheckoutCompleteContainerBtn, getCheckoutInfoContainer, getCheckoutSummaryContainer, getContinueBtn, getFinishBtn, getFirstNameField, getLastNameField, getPostalCodeField, getSuccessMessage,  } from "../PageObjects/checkoutPage";
+import {getLogoutSidebarLinkBtn} from "../PageObjects/menuPage";
+
+const randomFirstName = faker.person.firstName(); 
+const randomLastName = faker.person.lastName();
+const randomZipCode = faker.address.zipCode();
+
 describe('saucedemo.com', () => {
 
   before(() => {
@@ -5,15 +18,21 @@ describe('saucedemo.com', () => {
   })
     
   it('Log in', () => {
-    cy.logIn();
+    // cy.logIn();
+    cy.visit('https://www.saucedemo.com/');
+    cy.checkURL('https://www.saucedemo.com/');
+    typeUserName('standard_user');
+    typePassword('secret_sauce');
+    clickOnLogInBtn();
   });
    
   it('Check that inventory page is opened', () =>{
-    cy.inventoryPageIsOpened();
+    cy.checkURL('https://www.saucedemo.com/inventory.html');
+    getInventoryContainer().should('be.visible');
   });
 
   it('Add item to cart', () => {
-    cy.addItemToCart();
+   cy.addItemToCart();
   });
 
   it('Check that the cart counter is set to 1', () => {
@@ -21,11 +40,11 @@ describe('saucedemo.com', () => {
   });
 
   it( 'Remove added item from the inventory list', () =>{
-    cy.removeAddedItemFromInventoryList();
+    getRemoveSauceLabsBackpackBtn().click();
   });
 
   it('Check that the cart counter not exist', () => {
-    cy.cartCountreNotExist();
+    getShoppingCartBadge().should('not.exist');
   });
 
   it('Add item to cart', () => {
@@ -41,39 +60,50 @@ describe('saucedemo.com', () => {
   });
 
   it('Back to inventory list from cart', () =>{
-    cy.backToInventoryListFromCart();
-  });
+    getContinueShoppingBtn().click();
+    cy.checkURL('https://www.saucedemo.com/inventory.html');  });
 
   it('Open shopping cart', () => {
     cy.opeShoppingCart();
   });
 
   it('Click on the checkout btn', () =>{
-    cy.clickOnCheckoutBtn();
+        getCheckooutBtn().click();
+        cy.checkURL('https://www.saucedemo.com/checkout-step-one.html');
   });
 
   it('Pass checkout first step', () =>{
-    cy.passCheckoutStepOne();
+    getCheckoutInfoContainer().should('be.visible');
+    getFirstNameField().type(randomFirstName);
+    getLastNameField().type(randomLastName);
+    getPostalCodeField().type(randomZipCode);
+    getContinueBtn().click();
+    cy.checkURL('https://www.saucedemo.com/checkout-step-two.html');
   });
 
   it('Pass checkout second step', () => {
-    cy.passCheckoutStepSecond();
+    getCheckoutSummaryContainer().should('be.visible');
+    getFinishBtn().click();
+    cy.checkURL('https://www.saucedemo.com/checkout-complete.html');
   });
 
   it('Verify the display of the success message', () => {
-    cy.verifyDisplayOfSuccessMessage();
+    getCheckoutCompleteContainerBtn().should('be.visible');
+    getSuccessMessage().should('be.visible');
   })
 
   it('Back to inventory list after ordering', () => {
-    cy.backToInventoryListAfterOrdering()
+    getBackToProductsBtn().click();
+    cy.checkURL('https://www.saucedemo.com/inventory.html');
   });
 
   it('Open the menu', () => {
-    cy.clickOnMenuBtn();
-  })
+    getReactBurgerMenuBtn().click({force: true});
+  });
 
   it('Log out', () =>{
-    cy.logOut();
+    getLogoutSidebarLinkBtn().click({force: true});
+    cy.checkURL('https://www.saucedemo.com/');
   });
 
 });

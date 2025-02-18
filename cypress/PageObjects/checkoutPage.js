@@ -1,0 +1,10 @@
+export const getCheckoutInfoContainer = () => cy.get('[data-test="checkout-info-container"]');
+export const getFirstNameField = () => cy.get('[data-test="firstName"]');
+export const getLastNameField = () => cy.get('[data-test="lastName"]');
+export const getPostalCodeField = () => cy.get('[data-test="postalCode"]');
+export const getContinueBtn = () => cy.get('[data-test="continue"]');
+export const getCheckoutSummaryContainer = () => cy.get('[data-test="checkout-summary-container"]');
+export const getFinishBtn = () =>  cy.get('[data-test="finish"]');
+export const getCheckoutCompleteContainerBtn = () => cy.get('[data-test="checkout-complete-container"]');
+export const getSuccessMessage = () => cy.get('[data-test="complete-header"]').contains('Thank you for your order!');
+export const getBackToProductsBtn = () => cy.get('[data-test="back-to-products"]');

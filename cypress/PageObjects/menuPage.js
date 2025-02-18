@@ -1,0 +1,1 @@
+export const getLogoutSidebarLinkBtn = () =>  cy.get('[data-test="logout-sidebar-link"]');
