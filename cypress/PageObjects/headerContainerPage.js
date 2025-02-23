@@ -1,3 +1,17 @@
-export const getShoppingCartBadge = () => cy.get('[data-test="shopping-cart-badge"]');
-export const getShoppingcartLinkBtn = () => cy.get('[data-test="shopping-cart-link"]');
-export const getReactBurgerMenuBtn = () => cy.get('#react-burger-menu-btn');
+class headercontainerPage {
+
+    getShoppingCartBadge() {
+        return cy.getDataTest("shopping-cart-badge");
+    }
+
+    getShoppingcartLinkBtn() {
+        return cy.getDataTest("shopping-cart-link");
+    } 
+
+    getReactBurgerMenuBtn() {
+        return cy.get('#react-burger-menu-btn');
+    }
+
+}
+
+export default new headercontainerPage();

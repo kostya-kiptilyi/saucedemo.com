@@ -1,10 +1,44 @@
-export const getCheckoutInfoContainer = () => cy.get('[data-test="checkout-info-container"]');
-export const getFirstNameField = () => cy.get('[data-test="firstName"]');
-export const getLastNameField = () => cy.get('[data-test="lastName"]');
-export const getPostalCodeField = () => cy.get('[data-test="postalCode"]');
-export const getContinueBtn = () => cy.get('[data-test="continue"]');
-export const getCheckoutSummaryContainer = () => cy.get('[data-test="checkout-summary-container"]');
-export const getFinishBtn = () =>  cy.get('[data-test="finish"]');
-export const getCheckoutCompleteContainerBtn = () => cy.get('[data-test="checkout-complete-container"]');
-export const getSuccessMessage = () => cy.get('[data-test="complete-header"]').contains('Thank you for your order!');
-export const getBackToProductsBtn = () => cy.get('[data-test="back-to-products"]');
+class checkoutPage {
+
+    getCheckoutInfoContainer() {
+        return cy.getDataTest("checkout-info-container");
+    }
+
+    getFirstNameField() {
+        return cy.getDataTest("firstName");
+    }
+
+    getLastNameField() {
+        return cy.getDataTest("lastName");
+    }
+
+    getPostalCodeField() {
+        return  cy.getDataTest("postalCode");
+    }
+
+    getContinueBtn() {
+        return  cy.getDataTest("continue");
+    }
+
+    getCheckoutSummaryContainer() {
+        return cy.getDataTest("checkout-summary-container");
+    }
+
+    getFinishBtn() {
+        return cy.getDataTest("finish");
+    }
+
+    getCheckoutCompleteContainerBtn() {
+        return cy.getDataTest("checkout-complete-container");
+    }
+
+    getSuccessMessage() {
+        return cy.getDataTest("complete-header").contains('Thank you for your order!');
+    }
+
+    getBackToProductsBtn() {
+        return cy.getDataTest("back-to-products");
+    }
+
+}
+export default new checkoutPage();

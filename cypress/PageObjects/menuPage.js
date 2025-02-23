@@ -1,1 +1,9 @@
-export const getLogoutSidebarLinkBtn = () =>  cy.get('[data-test="logout-sidebar-link"]');
+class menuPage {
+
+    getLogoutSidebarLinkBtn() {
+       return cy.getDataTest("logout-sidebar-link");
+    }
+
+}
+
+export default new menuPage();

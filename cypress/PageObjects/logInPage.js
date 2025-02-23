@@ -1,3 +1,17 @@
-export const typeUserName = (userName) => cy.get('[data-test="username"]').type(userName);
-export const typePassword = (password) => cy.get('[data-test="password"]').type(password);
-export const clickOnLogInBtn = () => cy.get('[data-test="login-button"]').click();
+class logInPage {
+
+    setUserName(userName) {
+        return cy.getDataTest("username").type(userName);
+    }
+
+    setPassword(password) {
+        return cy.getDataTest("password").type(password);
+    }
+
+    clickOnLogInBtn() {
+        return cy.getDataTest("login-button").click();
+    }
+
+}
+
+export default new logInPage();
